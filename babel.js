@@ -48,7 +48,7 @@ exports.translate = function(load) {
 
   options.optional = options.optional || [];
   options.blacklist = options.blacklist || [];
-  options.plugins = options.plugins || [];
+  options.plugins = options.plugins || ['babel-plugin-mjsx'];
 
   if (options.blacklist.indexOf('runtime') != -1) {
     options.externalHelpers = true;
@@ -93,7 +93,7 @@ exports.translate = function(load) {
     if (typeof plugin.transformer == 'string')
       pluginPromises.push(
         loader.import(plugin.transformer, module.id).then(function(transformer) {
-          plugin.transformer = transformer['default'];
+          plugin.transformer = transformer;
         })
       );
 
